@@ -1,0 +1,3 @@
+class snake {
+  constructor() {}
+}
