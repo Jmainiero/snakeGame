@@ -1,20 +1,41 @@
 class snake {
-  constructor(x, y) {
-    // this.maxWidth = maxWidth;
-    // this.maxHeight = maxHeight;
+  constructor(maxWidth, maxHeight, x, y) {
+    this.defaultSize = 3;
     this.x = x;
     this.y = y;
-    this.nX = -1;
-    this.nY = -1;
-    this.snake = [];
-    this.buildSnake();
+    this.nextX;
+    this.nextY;
+    snakeTrail: this.snakeTrail = new Array();
+    this.render();
   }
+
   buildSnake() {
+    console.log(this.snakeTrail);
     this.ctx = canvas.getContext('2d');
-    this.ctx.fillStyle = 'rgb(255, 0, 255)';
-    this.ctx.fillRect(this.x * 20, this.y * 20, 20, 20);
-    // console.log(
-    //   Math.random(this.maxWidth) + ' this is y  ' + Math.random(this.maxHeight)
-    // );
+    this.ctx.fillStyle = 'rgb(0, 255, 255)';
+    this.x += this.nextX;
+    this.y += this.nextY;
+
+    console.log(this.x + ' this is y: ' + this.y);
+    this.snakeTrail.push({ x: this.x, y: this.y });
+    // while (this.snakeTrail.length > this.defaultSize) {
+    //   this.snakeTrail.shift();
+    // }
+
+    for (var i = 0; i < this.snakeTrail.length; i++) {
+      this.ctx.fillRect(
+        this.snakeTrail[i].x * 20,
+        this.snakeTrail[i].y * 20,
+        20,
+        20
+      );
+    }
+  }
+  render() {
+    console.log(this.snakeTrail);
+    setInterval(function() {
+      console.log('Calling');
+      this.buildSnake;
+    }, 1000);
   }
 }
