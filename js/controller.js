@@ -31,8 +31,10 @@ class controller {
     this.snake.buildSnake();
   }
 }
-const startGame = new controller();
-
-document.addEventListener('keydown', function(evt) {
-  startGame.moveSnake(evt);
-});
+// const startGame = new controller();
+// window.onload = function() {
+//   document.addEventListener('keydown', function(evt) {
+//     startGame.moveSnake(evt);
+//   });
+//   // setInterval(startGame.snake.buildSnake, 1000);
+// };

@@ -5,10 +5,8 @@ class snake {
     this.y = y;
     this.nextX;
     this.nextY;
-    snakeTrail: this.snakeTrail = new Array();
-    this.render();
+    this.snakeTrail = new Array();
   }
-
   buildSnake() {
     console.log(this.snakeTrail);
     this.ctx = canvas.getContext('2d');
@@ -16,11 +14,10 @@ class snake {
     this.x += this.nextX;
     this.y += this.nextY;
 
-    console.log(this.x + ' this is y: ' + this.y);
     this.snakeTrail.push({ x: this.x, y: this.y });
-    // while (this.snakeTrail.length > this.defaultSize) {
-    //   this.snakeTrail.shift();
-    // }
+    while (this.snakeTrail.length > this.defaultSize) {
+      this.snakeTrail.shift();
+    }
 
     for (var i = 0; i < this.snakeTrail.length; i++) {
       this.ctx.fillRect(
@@ -30,12 +27,5 @@ class snake {
         20
       );
     }
-  }
-  render() {
-    console.log(this.snakeTrail);
-    setInterval(function() {
-      console.log('Calling');
-      this.buildSnake;
-    }, 1000);
   }
 }
