@@ -33,6 +33,8 @@ class drawing {
 
     this.ctx.fillStyle = 'black';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    this.snake.buildSnake();
+    this.fruit.spawnFruit();
   }
   boardInit() {
     this.canvas.width = this.rows;
