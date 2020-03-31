@@ -34,23 +34,46 @@ class controller {
   }
 
   checkSnake() {
-    // console.log('Snake x,y : ' + this.snake.x * 20 + ' ' + this.snake.y * 20);
-    console.log('Fruit x,y : ' + this.fruit.foodX + ' ' + this.fruit.foodY);
+    if (this.snake.x < 0) {
+      this.snake.x = this.cols / this.pnt - 1;
+    }
+    if (this.snake.x > this.cols / this.pnt - 1) {
+      this.snake.x = 0;
+    }
+
+    if (this.snake.y < 0) {
+      this.snake.y = this.rows / this.pnt - 1;
+    }
+    if (this.snake.y > this.rows / this.pnt - 1) {
+      this.snake.y = 0;
+    }
+
+    console
+      .log
+      // 'Snake x,y : ' + this.snake.x * this.pnt + ' ' + this.snake.y * this.pnt
+      ();
+    // console.log('Fruit x,y : ' + this.fruit.foodX + ' ' + this.fruit.foodY);
     if (
-      this.snake.x * 20 == this.fruit.foodX &&
-      this.snake.y * 20 == this.fruit.foodY
+      this.snake.x * this.pnt == this.fruit.foodX &&
+      this.snake.y * this.pnt == this.fruit.foodY
     ) {
       console.log('ate apple');
       this.fruit.randomSpawn();
+      this.snake.defaultSize++;
+      console.log(this.snake.defaultSize);
     }
   }
 
   createBoard() {
-    this.canvas = document.getElementById('canvas');
-    this.ctx = canvas.getContext('2d');
+    // this.ctx.fillStyle = 'black';
+    // this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-    this.ctx.fillStyle = 'black';
+    var img = new Image();
+    img.src = 'img/terrain.png';
+    var pattern = this.ctx.createPattern(img, 'repeat');
+    this.ctx.fillStyle = pattern;
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
     this.snake.buildSnake();
     this.fruit.spawnFruit();
     this.checkSnake();
@@ -58,26 +81,6 @@ class controller {
   boardInit() {
     this.canvas.width = this.rows;
     this.canvas.height = this.cols;
-  }
-}
-
-class fruit {
-  constructor(width, height) {
-    this.width = width;
-    this.height = height;
-    this.spawn = this.spawnFruit();
-    this.foodX = 0;
-    this.foodY = 0;
-    this.randomSpawn();
-  }
-  spawnFruit() {
-    this.ctx = canvas.getContext('2d');
-    this.ctx.fillStyle = 'rgb(255, 0, 0)';
-    this.ctx.fillRect(this.foodX, this.foodY, 20, 20);
-  }
-  randomSpawn() {
-    this.foodX = Math.floor((Math.random() * this.width) / 20) * 20;
-    this.foodY = Math.floor((Math.random() * this.height) / 20) * 20;
   }
 }
 
@@ -89,5 +92,5 @@ window.onload = function() {
   });
   setInterval(function() {
     startGame.createBoard();
-  }, 1000 / 8);
+  }, 1000 / 5);
 };
